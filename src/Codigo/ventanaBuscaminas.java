@@ -1,6 +1,7 @@
 package Codigo;
 
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -44,8 +45,9 @@ public class ventanaBuscaminas extends javax.swing.JFrame {
                 
             }
         }
-        
         ponMinas(30);
+        cuentaMinas();
+        
     }
 
     private void botonPulsado(MouseEvent e){
@@ -66,6 +68,53 @@ public class ventanaBuscaminas extends javax.swing.JFrame {
             arrayBotones[f][c].setText("m");
             
         }
+    }
+    //cuenta minas es un metodo q para cada boton calcula el numero de minas que hay alrededor
+    private void cuentaMinas(){
+        //TODO falta por hacert q pille las de los extremos 
+        int minas = 0;
+        for (int  i=0; i<filas; i++){
+            for(int j=0; j<columnas;j++){
+                if((i>0) && (j>0) && (i<filas - 1) && (j< columnas - 1)){
+                    minas += arrayBotones[i-1][j-1].getMina(); //la mina de arriba a la izquierda
+                    
+                    minas += arrayBotones[i+1][j-1].getMina(); //la mina de abajo a la izquierda
+                    
+                    minas += arrayBotones[i-1][j].getMina(); //la mina de encima
+                    minas += arrayBotones[i+1][j].getMina(); //la mina de abajo
+                    
+                    minas += arrayBotones[i-1][j+1].getMina(); //la mina de encima a la derecha
+                    
+                    minas += arrayBotones[i+1][j+1].getMina(); //la mina de abajo a la derecha
+                    
+                }
+                
+                if((i>0) &&(j>0) &&(j<19)){
+                    minas += arrayBotones[i][j-1].getMina(); //la mina de la izquierda
+                    minas += arrayBotones[i][j+1].getMina(); //la mina de la derecha
+                }
+                
+                if(i>0 &&(j>0) && (i<filas-1)){
+                    minas += arrayBotones[i][j-1].getMina(); //la mina de la izquierda
+                }
+               
+                arrayBotones[i][j].setNumeroMinasAlrededor(minas);
+                
+                //TODO comentar la siguiente parte para que no aparezcan los numeros al iniciar la partida
+                if(arrayBotones[i][j].getMina() == 0){
+                    arrayBotones[i][j].setText(String.valueOf(minas));         
+                }
+                
+                minas = 0;
+                
+//                if(arrayBotones[i][j].getMina() == 1 ){
+//                    arrayBotones[i][j].setText("");
+//                }
+                
+                
+            }
+        }
+        
     }
     
     /**
