@@ -16,7 +16,7 @@ import javax.swing.JButton;
 
 /**
  *
- * @author xp
+ * @author Jp
  */
 public class ventanaBuscaminas extends javax.swing.JFrame {
 
@@ -55,6 +55,8 @@ public class ventanaBuscaminas extends javax.swing.JFrame {
         if (e.getButton() == MouseEvent.BUTTON3){
             miBoton.setText("?");
         }
+        
+        
     }
     
     private void ponMinas(int numeroMinas){
@@ -75,45 +77,40 @@ public class ventanaBuscaminas extends javax.swing.JFrame {
         int minas = 0;
         for (int  i=0; i<filas; i++){
             for(int j=0; j<columnas;j++){
-                if((i>0) && (j>0) && (i<filas - 1) && (j< columnas - 1)){
-                    minas += arrayBotones[i-1][j-1].getMina(); //la mina de arriba a la izquierda
-                    
-                    minas += arrayBotones[i+1][j-1].getMina(); //la mina de abajo a la izquierda
-                    
-                    minas += arrayBotones[i-1][j].getMina(); //la mina de encima
-                    minas += arrayBotones[i+1][j].getMina(); //la mina de abajo
-                    
-                    minas += arrayBotones[i-1][j+1].getMina(); //la mina de encima a la derecha
-                    
-                    minas += arrayBotones[i+1][j+1].getMina(); //la mina de abajo a la derecha
-                    
+                 
+                
+                for (int k = -1; k < 2; k++){
+                    for (int m= -1; m < 2; m++){
+                        if ((i+k >=0) && (j+m >= 0) && (i+k < filas) && (j+m < columnas)){
+                            minas = minas + arrayBotones[i+k][j+m].getMina();
+                        }
+                    }
                 }
                 
-                if((i>0) &&(j>0) &&(j<19)){
-                    minas += arrayBotones[i][j-1].getMina(); //la mina de la izquierda
-                    minas += arrayBotones[i][j+1].getMina(); //la mina de la derecha
-                }
                 
-                if(i>0 &&(j>0) && (i<filas-1)){
-                    minas += arrayBotones[i][j-1].getMina(); //la mina de la izquierda
-                }
                
                 arrayBotones[i][j].setNumeroMinasAlrededor(minas);
                 
                 //TODO comentar la siguiente parte para que no aparezcan los numeros al iniciar la partida
-                if(arrayBotones[i][j].getMina() == 0){
-                    arrayBotones[i][j].setText(String.valueOf(minas));         
-                }
                 
+                if(arrayBotones[i][j].isEnabled()){
+                    if(arrayBotones[i][j].getMina() == 0){
+                        arrayBotones[i][j].setText(String.valueOf(minas));         
+                    }
+                }
                 minas = 0;
                 
 //                if(arrayBotones[i][j].getMina() == 1 ){
 //                    arrayBotones[i][j].setText("");
 //                }
-                
+                if(arrayBotones[i][j].getNumeroMinasAlrededor() == 0){
+                    arrayBotones[i][j].setEnabled(false);
+                }
                 
             }
         }
+        
+        
         
     }
     
