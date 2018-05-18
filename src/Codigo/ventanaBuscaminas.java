@@ -5,10 +5,12 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
+import javafx.scene.control.Alert;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -52,6 +54,7 @@ public class ventanaBuscaminas extends javax.swing.JFrame {
         }
         ponMinas(30);
         cuentaMinas();
+         
 
     }
 
@@ -68,7 +71,7 @@ public class ventanaBuscaminas extends javax.swing.JFrame {
                 miBoton.setOpaque(false);
                 miBoton.setBackground(Color.red);
                   Perdiste();
-                 
+                  JOptionPane.showMessageDialog(null, "GAME OVER");
               
             } else if (miBoton.getNumeroMinasAlrededor() == 0) {
                 miBoton.setFocusPainted(false);
@@ -135,8 +138,14 @@ private void Perdiste(){
             }
         }
 
+}
+    
         
-    }
+    
+ 
+
+
+
     
 
     private void ponMinas(int numeroMinas) {

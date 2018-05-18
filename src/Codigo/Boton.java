@@ -31,7 +31,7 @@ public class Boton extends JButton{
         this.setBorder(null);
         this.setOpaque(false);
        this.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        this.setBorderPainted(false);
+        this.setBorderPainted(true);
         this.setBackground(Color.GRAY);
         this.setFocusPainted(false);
         
