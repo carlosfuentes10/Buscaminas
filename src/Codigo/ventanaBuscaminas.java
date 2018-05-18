@@ -8,6 +8,7 @@ import java.util.Random;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -66,14 +67,19 @@ public class ventanaBuscaminas extends javax.swing.JFrame {
                 miBoton.setIcon(mina);
                 miBoton.setOpaque(false);
                 miBoton.setBackground(Color.red);
+                  Perdiste();
+                 
               
             } else if (miBoton.getNumeroMinasAlrededor() == 0) {
                 miBoton.setFocusPainted(false);
                 expandir(miBoton);
+                
             } else {
-                miBoton.setText(String.valueOf(miBoton.getNumeroMinasAlrededor()));
-                miBoton.setEnabled(false);
-                miBoton.setFocusPainted(false);
+                miBoton.setImagen(miBoton.getNumeroMinasAlrededor());
+                miBoton.setEnabled(true);
+                
+               
+                
 
             }
 
@@ -94,7 +100,7 @@ public class ventanaBuscaminas extends javax.swing.JFrame {
                             }else if(arrayBotones[boton.getI() + k][boton.getJ() + m].getNumeroMinasAlrededor() !=0) {
                                 arrayBotones[boton.getI() + k][boton.getJ() + m].setEnabled(false);
                                 arrayBotones[boton.getI() + k][boton.getJ() + m]
-                                        .setText(String.valueOf(arrayBotones[boton.getI() + k][boton.getJ() + m].getNumeroMinasAlrededor()));
+                                        .setImagen(arrayBotones[boton.getI() + k][boton.getJ() + m].getNumeroMinasAlrededor());
                                 
                             }
                         }
@@ -105,7 +111,32 @@ public class ventanaBuscaminas extends javax.swing.JFrame {
         }
     }
     
+private void Perdiste(){
+       
+        for(int i=0; i<filas; i++){
+            for(int j=0;j<columnas; j++){
+                
+                if(arrayBotones[i][j].getMina() == 0){
+                    if(arrayBotones[i][j].getNumeroMinasAlrededor()!=0){
+                  arrayBotones[i][j].setImagen(arrayBotones[i][j].getNumeroMinasAlrededor());
+                
+                    }
+                }
+                else {
+                   arrayBotones[i][j].setIcon(mina);
+                 
+                }
 
+//               arrayBotones[i][j].setEnabled(true);
+//                
+                
+            
+                
+            }
+        }
+
+        
+    }
     
 
     private void ponMinas(int numeroMinas) {
