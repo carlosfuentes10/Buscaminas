@@ -28,9 +28,8 @@ public class Boton extends JButton{
     public Boton (int _i, int _j){
         i = _i;
         j = _j;
-        this.setBorder(null);
+        
         this.setOpaque(false);
-       this.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         this.setBorderPainted(true);
         this.setBackground(Color.GRAY);
         this.setFocusPainted(false);
@@ -63,7 +62,7 @@ public class Boton extends JButton{
     
     public void setImagen(int num){   
         String nombre = "";
-        setEnabled(true);
+        
         switch (num){
             case 0: nombre = "blank"; break;
             case 1: nombre = "number1"; break;

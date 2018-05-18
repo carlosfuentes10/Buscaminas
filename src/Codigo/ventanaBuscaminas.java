@@ -25,7 +25,7 @@ public class ventanaBuscaminas extends javax.swing.JFrame {
 
     int filas = 15;
     int columnas = 20;
-    int numeroMinas =30;
+    int numeroMinas =50;
     Icon mina = new ImageIcon(getClass().getResource("/imagenes/buscaminas.png"));
     Icon bandera = new ImageIcon(getClass().getResource("/imagenes/bandera.jpg"));
 
@@ -36,7 +36,9 @@ public class ventanaBuscaminas extends javax.swing.JFrame {
      */
     public ventanaBuscaminas() {
         initComponents();
-        setSize(800, 600);
+        setSize(580, 470);
+        jDialog1.setSize(530,310);
+        jDialog1.setLocationRelativeTo(null);
         setLocationRelativeTo(null);
         getContentPane().setLayout(new GridLayout(filas, columnas));
         for (int i = 0; i < filas; i++) {
@@ -59,6 +61,7 @@ public class ventanaBuscaminas extends javax.swing.JFrame {
     }
 
     private void botonPulsado(MouseEvent e) {
+        
         Boton miBoton = (Boton) e.getComponent();
         if (e.getButton() == MouseEvent.BUTTON3 && miBoton.isEnabled()) {
             miBoton.setIcon(bandera);
@@ -68,11 +71,12 @@ public class ventanaBuscaminas extends javax.swing.JFrame {
         if (e.getButton() == MouseEvent.BUTTON1 && miBoton.getText().equals("")) {
             if (miBoton.getMina() == 1) {
                 miBoton.setIcon(mina);
-                miBoton.setOpaque(false);
+                miBoton.setOpaque(true);
                 miBoton.setBackground(Color.red);
-                  Perdiste();
-                  JOptionPane.showMessageDialog(null, "GAME OVER");
-              
+                Perdiste();
+//         JOptionPane.showMessageDialog(null, "GAME OVER"),JOptionPane;
+                jDialog1.setVisible(true);
+               
             } else if (miBoton.getNumeroMinasAlrededor() == 0) {
                 miBoton.setFocusPainted(false);
                 expandir(miBoton);
@@ -80,7 +84,7 @@ public class ventanaBuscaminas extends javax.swing.JFrame {
             } else {
                 miBoton.setImagen(miBoton.getNumeroMinasAlrededor());
                 miBoton.setEnabled(true);
-                
+               
                
                 
 
@@ -100,10 +104,10 @@ public class ventanaBuscaminas extends javax.swing.JFrame {
                                 arrayBotones[boton.getI() + k][boton.getJ() + m].setEnabled(false);
                                 expandir(arrayBotones[boton.getI() + k][boton.getJ() + m]);
 
-                            }else if(arrayBotones[boton.getI() + k][boton.getJ() + m].getNumeroMinasAlrededor() !=0) {
-                                arrayBotones[boton.getI() + k][boton.getJ() + m].setEnabled(false);
-                                arrayBotones[boton.getI() + k][boton.getJ() + m]
-                                        .setImagen(arrayBotones[boton.getI() + k][boton.getJ() + m].getNumeroMinasAlrededor());
+                            }else
+                            {arrayBotones[boton.getI() + k][boton.getJ() + m].setEnabled(true);
+                             arrayBotones[boton.getI() + k][boton.getJ() + m]
+                             .setImagen(arrayBotones[boton.getI() + k][boton.getJ() + m].getNumeroMinasAlrededor());
                                 
                             }
                         }
@@ -130,8 +134,8 @@ private void Perdiste(){
                  
                 }
 
-//               arrayBotones[i][j].setEnabled(true);
-//                
+               arrayBotones[i][j].setEnabled(true);
+                
                 
             
                 
@@ -184,7 +188,7 @@ private void Perdiste(){
 //                    }
 //                }
                 minas = 0;
-
+                
 //                if(arrayBotones[i][j].getMina() == 1 ){
 //                    arrayBotones[i][j].setText("");
 //                }
@@ -194,6 +198,16 @@ private void Perdiste(){
             }
         }
 
+    }
+    
+    private void Reiniciar(){
+        ventanaBuscaminas reset = new ventanaBuscaminas();
+        reset.setVisible(true);
+        dispose();
+    }
+    
+    private void Close(){
+        dispose();
     }
 
     /**
@@ -205,21 +219,60 @@ private void Perdiste(){
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        jDialog1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Sigue al Cono @conoufv");
+        jDialog1.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 140, -1));
+
+        jButton1.setBackground(new java.awt.Color(102, 102, 102));
+        jButton1.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(204, 204, 204));
+        jButton1.setText("REINICIAR");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton1MousePressed(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jDialog1.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/game.png"))); // NOI18N
+        jDialog1.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 629, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 360, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
+        Reiniciar();
+        
+    }//GEN-LAST:event_jButton1MousePressed
 
     /**
      * @param args the command line arguments
@@ -257,5 +310,9 @@ private void Perdiste(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
